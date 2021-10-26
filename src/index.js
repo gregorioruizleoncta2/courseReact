@@ -4,13 +4,13 @@ import ReactDOM from 'react-dom'
 const Header = (props)=> {
     return (
       <div>
-        <p>{props.title}</p>
+        <p>{props.curso.name}</p>
     </div>
     )
 }
 
 const Content = (props)=> {
-  const salida = props.part.map(element => 'Parts: '+element.name+' Number: '+ element.exercises)
+  const salida = props.curso.parts.map(element => 'Parts: '+element.name+' Number: '+ element.exercises)
   return (
     <div>
       {salida}
@@ -20,7 +20,7 @@ const Content = (props)=> {
 
 const Total = (props)=> {
   let sum = 0
-  props.total.forEach(element => {
+  props.curso.parts.forEach(element => {
     sum +=element.exercises
   });
   return (
@@ -31,27 +31,29 @@ const Total = (props)=> {
 }
 
 const App = () => {
-  const course = 'Half Stack application development'
-  const parts = [
-    {
-      name: 'Fundamentals of React',
-      exercises: 10
-    },
-    {
-      name: 'Using props to pass data',
-      exercises: 7
-    },
-    {
-      name: 'State of a component',
-      exercises: 14
-    }
-  ]
+  const course = {
+    name: 'Half Stack application development',
+    parts: [
+      {
+        name: 'Fundamentals of React',
+        exercises: 10
+      },
+      {
+        name: 'Using props to pass data',
+        exercises: 7
+      },
+      {
+        name: 'State of a component',
+        exercises: 14
+      }
+    ]
+  }
   
   return (
     <div>
-      <Header title={course} />
-      <Content part={parts} />
-      <Total total={parts} />
+      <Header curso={course} />
+      <Content curso={course} />
+      <Total curso={course} />
       
     </div>
   )
