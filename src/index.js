@@ -10,18 +10,22 @@ const Header = (props)=> {
 }
 
 const Content = (props)=> {
-  console.log(props)
+  const salida = props.part.map(element => 'Parts: '+element.name+' Number: '+ element.exercises)
   return (
     <div>
-      <p>Parte: {props.part} </p><p>Numero: {props.excercise}</p>
-  </div>
+      {salida}
+   </div>
   )
 }
 
 const Total = (props)=> {
+  let sum = 0
+  props.total.forEach(element => {
+    sum +=element.exercises
+  });
   return (
     <div>
-      <p>Total {props.total}</p>      
+      <p>Total {sum}</p>      
   </div>
   )
 }
@@ -46,10 +50,8 @@ const App = () => {
   return (
     <div>
       <Header title={course} />
-      <Content part={parts[0].name} excercise={parts[0].exercises} />
-      <Content part={parts[1].name} excercise={parts[1].exercises} />
-      <Content part={parts[2].name} excercise={parts[2].exercises} />
-      <Total total={ parts[0].exercises + parts[1].exercises + parts[2].exercises} />
+      <Content part={parts} />
+      <Total total={parts} />
       
     </div>
   )
