@@ -2,12 +2,36 @@ import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
 const Display = props => <div><p>{props.text}:{props.value}</p></div>
+
 const Printer = props => <div><p>{props.text}</p></div>
+
 const Button = (props) => (
   <button onClick={props.handleClick}>
     {props.text}
   </button>
 )
+
+const Statistics = (props) => {
+  const total = props.good + props.neutral + props.bad
+  const average = total / 3
+  const positive = (total) =>{
+      if (total !== 0)
+        return props.good / total   
+      else  
+        return 0
+  }     
+    
+  return (
+    <div>
+        <p>ALL = {total}</p>
+        <p>Average = {average}</p>
+        <p>Positive = {positive(total)}</p>
+    </div>
+  )
+}
+
+
+
 
 
 
@@ -16,6 +40,8 @@ const App = () => {
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
+  
+  
 
   return (
     
@@ -25,9 +51,11 @@ const App = () => {
       <Button handleClick={() => setNeutral(neutral + 1)} text="Neutral" />
       <Button handleClick={() => setBad(bad + 1)} text="Bad" />
       <Printer text="Statistics" />
-       <Display text="Good" value={good} />
-       <Display text="Neutral" value={neutral} />
-       <Display text="Bad" value={bad} />
+      <Display text="Good" value={good} />
+      <Display text="Neutral" value={neutral} />
+      <Display text="Bad" value={bad} />
+      <Printer text="More Statistics" />
+      <Statistics good={good} neutral={neutral} bad={bad} />    
       
     </div>
     
