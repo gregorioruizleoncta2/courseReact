@@ -12,14 +12,14 @@ const Button = (props) => (
 const Good = (props) => {
   return (
     <div>
-        <p>Good = {props.good}</p>
+        {props.good}
     </div>
   )
 }
 const Neutral = (props) => {
   return (
     <div>
-        <p>Neutral = {props.neutral}</p>
+        {props.neutral}
     </div>
   )
 }
@@ -27,7 +27,7 @@ const Neutral = (props) => {
 const Bad = (props) => {
   return (
     <div>
-        <p>Bad = {props.bad}</p>
+        {props.bad}
     </div>
   )
 }
@@ -36,7 +36,7 @@ const Statistics = (props) => {
   const total = props.good + props.neutral + props.bad
   return (
     <div>
-        <p>ALL = {total}</p>
+        {total}
     </div>
   )
 }
@@ -47,7 +47,7 @@ const Average = (props) => {
     
   return (
     <div>
-        <p>Average = {average}</p>
+        {average}
     </div>
   )
 }
@@ -63,7 +63,7 @@ const Positive = (props) => {
     
   return (
     <div>
-        <p>Positive = {positive(total)}</p>
+        {positive(total)}
     </div>
   )
 }
@@ -82,12 +82,60 @@ const App = () => {
       <Button handleClick={() => setNeutral(neutral + 1)} text="Neutral" />
       <Button handleClick={() => setBad(bad + 1)} text="Bad" />
       <Printer text="Statistics" />
-      <Good good={good} neutral={neutral} bad={bad} />    
-      <Neutral good={good} neutral={neutral} bad={bad} />    
-      <Bad good={good} neutral={neutral} bad={bad} />    
-      <Statistics good={good} neutral={neutral} bad={bad} />    
-      <Average good={good} neutral={neutral} bad={bad} />    
-      <Positive good={good} neutral={neutral} bad={bad} />    
+      <table>
+      <tbody>
+      <tr>
+        <td>
+          Good
+        </td>
+        <td>
+        <Good good={good} neutral={neutral} bad={bad} />    
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Neutral
+        </td>
+        <td>
+        <Neutral good={good} neutral={neutral} bad={bad} />    
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Bad
+        </td>
+        <td>
+        <Bad good={good} neutral={neutral} bad={bad} />    
+        </td>
+      </tr>
+      <tr>
+        <td>
+          All
+        </td>
+        <td>
+        <Statistics good={good} neutral={neutral} bad={bad} />    
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Average
+        </td>
+        <td>
+        <Average good={good} neutral={neutral} bad={bad} />    
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Positive
+        </td>
+        <td>
+        <Positive good={good} neutral={neutral} bad={bad} />    
+        </td>
+      </tr>
+      </tbody>
+      
+      </table>      
+
       
     </div>
   )
