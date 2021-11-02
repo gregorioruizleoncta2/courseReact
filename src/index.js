@@ -26,6 +26,18 @@ const Votes = (props) =>{
     )
 }
 
+const MaxVotes = (props) =>{
+  return (
+    <div>
+      <h1>Anecdote with most votes </h1>
+      <p>{props.anecdotes[props.mostVoted]} </p>
+      has {props.votes[props.mostVoted]} votes
+    </div>
+  )
+}
+
+
+
 const anecdotes = [
   'If it hurts, do it more often',
   'Adding manpower to a late software project makes it later!',
@@ -43,12 +55,19 @@ const App = () => {
   // save clicks of each button to its own state
   const [selected, setSelected] = useState(0)
   const [votes, setVotes] = useState(initVotes)
-  
+  const [mostVoted, setMostVoted] = useState(0)
   
   const handlerUpdateVote = (selected) =>{
         const changeVotes = [...votes]
         changeVotes[selected] +=1
         setVotes(changeVotes)
+        updateMaxVotes(changeVotes)
+  }
+
+  const updateMaxVotes = (votes) =>{
+    const maximo = Math.max(...votes)
+    const index = votes.findIndex(element => element===maximo);
+    setMostVoted(index)    
   }
 
   return (
@@ -57,6 +76,8 @@ const App = () => {
       <Votes votes={votes} selected={selected} />
       <Button handleClick={() => setSelected(aleatorio(0,anecdotes.length-1))} text="Next Anecdote" />
       <Button handleClick={() => handlerUpdateVote(selected)} text="vote" />
+      <MaxVotes votes={votes} anecdotes={anecdotes} mostVoted={mostVoted} />
+      
     </div>
   )
 }
